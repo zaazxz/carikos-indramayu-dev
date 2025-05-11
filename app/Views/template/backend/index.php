@@ -1,10 +1,28 @@
+<?php 
+
+// Catch Route if route only have 1 segment catch point 1, and if more than 1 segment catch point 2
+$uri = service('uri');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Carikos-Indramayu</title>
+  <title>
+    Carikos-Indramayu | 
+    <?php 
+    
+    if ($uri->getSegment(2) == '') {
+      echo $uri->getSegment(1);
+    } else {
+      echo $uri->getSegment(2);
+    }
+    
+    ?>
+  </title>
 
   <!-- Google Font (Source Sans Pro) : Start -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">

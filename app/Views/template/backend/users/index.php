@@ -3,7 +3,7 @@
         <div class="card-header">
 
             <div class="card-tools">
-                <a href="<?= base_url('User/Input') ?>" class="btn btn-flat btn-primary btn-sm">
+                <a href="/dashboard/users/create" class="btn btn-flat btn-primary btn-sm">
                     <i class="fas fa-plus"></i> Tambah
                 </a>
             </div>
@@ -39,9 +39,20 @@
                                 <?php } ?>
                             </td>
                             <td class="text-center">
-                                <a href="#" class="btn btn-xs btn-info btn-flat"><i class="fas fa-eye"></i></a>
-                                <a href="#" class="btn btn-xs btn-warning btn-flat"><i class="fas fa-pencil-alt"></i></a>
-                                <a href="#" onclick="return confirm('Yakin Hapus Data..?')" class="btn btn-xs btn-danger btn-flat"><i class="fas fa-trash"></i></a>
+                                <a href="/dashboard/users/<?php echo $value['id'] ?>" class="btn btn-xs btn-info btn-flat"><i class="fas fa-eye"></i></a>
+                                <a href="/dashboard/users/edit/<?php echo $value['id'] ?>" class="btn btn-xs btn-warning btn-flat"><i class="fas fa-pencil-alt"></i></a>
+                                
+                                <!-- Delete : Start -->
+                                <form action="/dashboard/users/delete/<?php echo $value['id'] ?>" method="post" enctype="multipart/form-data" onsubmit="return confirm('Apakah anda yakin ingin menghapus data ini?')" style="display: inline-block;">
+
+                                    <!-- CSRF : Start -->
+                                    <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
+                                    <!-- CSRF : End -->
+
+                                    <button type="submit" class="btn btn-xs btn-danger btn-flat"><i class="fas fa-trash"></i></button>
+
+                                </form>
+
                             </td>
                         </tr>
                     <?php } ?>
@@ -74,4 +85,12 @@
             "responsive": true,
         });
     });
+
+    // Catch Data from redirecting
+    let successMessage = "<?php echo session()->getFlashdata('success'); ?>";
+
+    if (successMessage) {
+        alert(successMessage);
+    }
+
 </script>
