@@ -47,7 +47,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="/users" class="nav-link <?php if ($title == 'Users') echo 'active'; ?>">
+                    <a href="/dashboard/users" class="nav-link <?php if ($title == 'Users') echo 'active'; ?>">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             User
@@ -56,7 +56,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/dashboard/setting" class="nav-link <?php if ($title == 'Setting') echo 'active'; ?>">
                         <i class="nav-icon fas fa-cogs"></i>
                         <p>
                             Setting

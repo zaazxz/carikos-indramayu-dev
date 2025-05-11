@@ -21,7 +21,17 @@ $routes->get('/', 'Home::index');
 $routes->get('/dashboard', 'Dashboard::index');
 
 // Users
-$routes->get('/users', 'User::index');
+$routes->get('/dashboard/users/edit/(:any)', 'User::edit/$1');
+$routes->get('/dashboard/users/(:any)', 'User::show/$1');
+$routes->get('/dashboard/users/create', 'User::create');
+$routes->get('/dashboard/users', 'User::index');
+$routes->post('/dashboard/users/delete/(:any)', 'User::delete/$1');
+$routes->post('/dashboard/users/update/(:any)', 'User::update/$1');
+$routes->post('/dashboard/users/store', 'User::store');
+
+// Settings
+$routes->get('/dashboard/setting', 'Setting::index');
+
 
 /* Backend : End */
 
