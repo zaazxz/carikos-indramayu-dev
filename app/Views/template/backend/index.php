@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // Catch Route if route only have 1 segment catch point 1, and if more than 1 segment catch point 2
 $uri = service('uri');
@@ -12,15 +12,15 @@ $uri = service('uri');
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>
-    Carikos-Indramayu | 
-    <?php 
-    
+    Carikos-Indramayu |
+    <?php
+
     if ($uri->getSegment(2) == '') {
       echo $uri->getSegment(1);
     } else {
       echo $uri->getSegment(2);
     }
-    
+
     ?>
   </title>
 
@@ -45,6 +45,7 @@ $uri = service('uri');
   <!-- leaflet : Start -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
   <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
   <!-- leaflet : End -->
 
   <!-- Javascript Plugin : Start -->
@@ -73,6 +74,7 @@ $uri = service('uri');
   <!-- leaflet : Start -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css" />
   <script src="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.umd.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
   <!-- leaflet : End -->
 
 </head>

@@ -29,6 +29,14 @@ $routes->post('/dashboard/users/delete/(:any)', 'User::delete/$1');
 $routes->post('/dashboard/users/update/(:any)', 'User::update/$1');
 $routes->post('/dashboard/users/store', 'User::store');
 
+// Wilayah
+$routes->get('/dashboard/wilayah', 'Wilayah::index');
+$routes->get('/dashboard/wilayah/create', 'Wilayah::create');
+$routes->post('/dashboard/wilayah/store', 'Wilayah::store');
+$routes->get('/dashboard/wilayah/edit/(:any)', 'Wilayah::edit/$1');
+$routes->post('/dashboard/wilayah/update/(:any)', 'Wilayah::update/$1');
+$routes->post('/dashboard/wilayah/delete/(:any)', 'Wilayah::delete/$1');
+
 // Settings
 $routes->get('/dashboard/setting', 'Setting::index');
 
