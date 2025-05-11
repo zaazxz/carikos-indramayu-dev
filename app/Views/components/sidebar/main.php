@@ -20,7 +20,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/dashboard/wilayah" class="nav-link <?php if ($title == 'Wilayah') echo 'active'; ?>">
                         <i class="nav-icon fas fa-layer-group"></i>
                         <p>
                             Wilayah
