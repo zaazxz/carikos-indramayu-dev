@@ -7,24 +7,6 @@ use CodeIgniter\Model;
 class UserModel extends Model
 {
 
-        /*
-
-            'id'                : not null, auto_increment, int
-            'name'              : not null, varchar(100), text
-            'email'             : not null, varchar(100), email
-            'account'           : null
-            'account_username'  : null
-            'account_id'        : null
-            'phone'             : null
-            'password'          : not null    
-            'level'             : null
-            'foto'              : null
-            'status'            : null
-            'created_at'        : not null
-            'updated_at'        : not null
-
-        */
-
     // Variable
     protected $table      = 'users';
     protected $allowedFields = ['name', 'email', 'phone', 'account', 'account_username', 'account_id', 'password', 'level', 'foto', 'status', 'created_at', 'updated_at'];

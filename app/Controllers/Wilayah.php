@@ -100,7 +100,7 @@ class Wilayah extends BaseController
         $wilayah = $this->WilayahModel->getDataWhere($id);
 
         $data = [
-            'title' => 'Edit Wilayah' . $wilayah[0]['name'],
+            'title' => 'Edit Wilayah ' . $wilayah[0]['name'],
             'page' => 'template/backend/wilayah/edit',
             'wilayah' => $this->WilayahModel->getDataWhere($id),
             'setting' => $this->SettingModel->getSetting()

@@ -14,21 +14,33 @@
 
         <div class="card-body">
 
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        <label>Coordinat Wilayah</label>
-                        <input name="coordinat_wilayah" value="<?php echo $setting['coordinat'] ?>" type="text" class="form-control" placeholder="Coordinat Wilayah" disabled>
-                    </div>
-                </div>
+            <form action="/dashboard/setting/update/<?php echo $setting[0]['id'] ?>" method="post">
 
-                <div class="col-6">
-                    <div class="form-group">
-                        <label>Zoom View</label>
-                        <input type="number" value="<?php echo $setting['zoom'] ?>" name="zoom_view" min="1" max="20" class="form-control" placeholder="Zoom View" disabled>
+                <!-- CSRF token : Start -->
+                <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
+                <!-- CSRF token : End -->
+                
+                <!-- Form Input : Start -->
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Coordinat Wilayah</label>
+                            <input name="coordinat" value="<?php echo $setting[0]['coordinat'] ?>" type="text" class="form-control" placeholder="Coordinat Wilayah">
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Zoom View</label>
+                            <input type="number" value="<?php echo $setting[0]['zoom'] ?>" name="zoom" min="1" max="20" class="form-control" placeholder="Zoom View">
+                        </div>
                     </div>
                 </div>
-            </div>
+                <!-- Form Input : End -->
+
+                <button type="submit" class="btn btn-primary btn-block">Simpan</button>
+
+            </form>
 
         </div>
     </div>
@@ -52,8 +64,8 @@
     });
 
     var map = L.map('map', {
-        center: [<?php echo $setting['coordinat'] ?>],
-        zoom: <?php echo $setting['zoom'] ?>,
+        center: [<?php echo $setting[0]['coordinat'] ?>],
+        zoom: <?php echo $setting[0]['zoom'] ?>,
         layers: [peta1]
     });
 
@@ -65,4 +77,11 @@
     var layerControl = L.control.layers(baseMaps).addTo(map);
 
     map.addControl(L.control.search());
+
+    // Catch error
+    let successMessage = "<?php echo session()->getFlashdata('success'); ?>";
+
+    if (successMessage) {
+        alert(successMessage);
+    }
 </script>

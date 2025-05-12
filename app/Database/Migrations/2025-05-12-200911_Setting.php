@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Wilayah extends Migration
+class Setting extends Migration
 {
     public function up()
     {
@@ -13,38 +13,34 @@ class Wilayah extends Migration
                 'type'           => 'INT',
                 'constraint'     => 11,
                 'auto_increment' => true,
-                'unsigned' => true,
+                'unsigned' => true
             ],
-            'name' => [
+            'coordinat' => [
                 'type' => 'VARCHAR',
                 'constraint' => '100',
                 'null' => false,
             ],
-            'geojson' => [
-                'type' => 'TEXT',
-                'null' => false,
-            ],
-            'warna' => [
+            'zoom' => [
                 'type' => 'VARCHAR',
                 'constraint' => '100',
                 'null' => false,
             ],
             'created_at' => [
-                'type' => 'datetime',
-                'null' => false,
+                'type' => 'DATETIME',
+                'null' => true,
             ],
             'updated_at' => [
-                'type' => 'datetime',
+                'type' => 'DATETIME',
                 'null' => true,
             ],
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->createTable('wilayah');
+        $this->forge->createTable('setting');
     }
 
     public function down()
     {
-        $this->forge->dropTable('wilayah');
+        $this->forge->dropTable('setting');
     }
 }

@@ -39,6 +39,11 @@ $routes->post('/dashboard/wilayah/delete/(:any)', 'Wilayah::delete/$1');
 
 // Settings
 $routes->get('/dashboard/setting', 'Setting::index');
+$routes->post('/dashboard/setting/update/(:any)', 'Setting::update/$1');
+
+// Jenis KOS
+$routes->get('/dashboard/jeniskos', 'JenisKos::index');
+$routes->post('/dashboard/jeniskos/update/(:any)', 'JenisKos::update/$1');
 
 
 /* Backend : End */

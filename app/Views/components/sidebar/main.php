@@ -29,7 +29,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/dashboard/jeniskos" class="nav-link <?php if ($title == 'Jenis Kos') echo 'active'; ?>">
                         <i class="nav-icon fas fa-swimming-pool"></i>
                         <p>
                             Jenis Kos

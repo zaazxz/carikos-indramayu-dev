@@ -7,14 +7,12 @@ use CodeIgniter\Model;
 class SettingModel extends Model
 {
     // Variable
-    private $setting = [
-        'coordinat' => '-6.333933182070731, 108.33948946880335',
-        'zoom' => '12'
-    ];
+    protected $table = 'setting';
+    protected $allowedFields = ['id', 'coordinat', 'zoom', 'created_at', 'updated_at'];
 
     public function getSetting()
     {
-        return $this->setting;
+        return $this->db->table('setting')->get()->getResultArray();
     }
 
 }
