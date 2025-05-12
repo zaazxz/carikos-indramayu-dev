@@ -39,4 +39,10 @@ class WilayahModel extends Model
     {
         return $this->db->table('wilayah')->delete($id);
     }
+    
+    // Counting 
+    public function countData()
+    {
+        return $this->db->table('wilayah')->countAllResults();
+    }
 }

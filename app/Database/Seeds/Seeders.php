@@ -152,8 +152,58 @@ class Seeders extends Seeder
             ]
         ];
 
+        $settingSeeder = [
+            [
+                'coordinat' => '-6.333933182070731, 108.33948946880335',
+                'zoom' => '12',
+                'created_at' => date('Y-m-d H:i:s'),
+            ]
+        ];
+
+        // Jenis Kos Seeder
+        $jenisKosSeeder = [
+            [
+                'type'  => 'Putra',
+                'marker' => '1666971715_6b732123644b75f5226c.png',
+                'created_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'type'  => 'Putri',
+                'marker' => 'sd.png',
+                'created_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'type'  => 'Campur',
+                'marker' => 'smp.png',
+                'created_at' => date('Y-m-d H:i:s'),
+            ]
+        ];
+
+        $kosSeeder = [
+            [
+                'id_jenis' => '1',
+                'name' => 'Kos Putra Contoh',
+                'price' => '200000',
+                'available' => '5',
+                'id_user' => '3',
+                'coordinat' => '-6.329630392391723,108.33137609198383',
+                'photo' => '1746894405_0f185fb80725f65a849f.jpg',
+                'address' => 'Jalan Kediri',
+                'bathroom' => 'Didalam',
+                'air_conditioner' => 'Tersedia',
+                'wifi' => 'Tersedia',
+                'id_wilayah' => '1',
+                'flood_info' => 'Aman',
+                'status' => 'Verified',
+                'created_at' => date('Y-m-d H:i:s'),
+            ]
+        ];
+
         // Insert
         $this->db->table('users')->insertBatch($usersSeeder);
         $this->db->table('wilayah')->insertBatch($wilayahSeeder);
+        $this->db->table('setting')->insertBatch($settingSeeder);
+        $this->db->table('jenis_kos')->insertBatch($jenisKosSeeder);
+        $this->db->table('kos')->insertBatch($kosSeeder);
     }
 }

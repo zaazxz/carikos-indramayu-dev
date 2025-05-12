@@ -17,7 +17,9 @@
 <div class="col-lg-6 col-6">
     <div class="small-box bg-indigo">
         <div class="inner">
-            <h3>5</h3>
+            <h3>
+                <?php echo $wilayah ?>  
+            </h3>
             <p>Wilayah</p>
         </div>
         <div class="icon">

@@ -58,8 +58,8 @@
     });
 
     var map = L.map('map', {
-        center: [<?php echo $setting['coordinat'] ?>],
-        zoom: <?php echo $setting['zoom'] ?>,
+        center: [<?php echo $setting[0]['coordinat'] ?>],
+        zoom: <?php echo $setting[0]['zoom'] ?>,
         layers: [peta1]
     });
 
