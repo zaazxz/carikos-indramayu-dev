@@ -38,7 +38,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/dashboard/kos" class="nav-link <?php if ($title == 'Kos') echo 'active'; ?>">
                         <i class="nav-icon fas fa-school"></i>
                         <p>
                             Kos

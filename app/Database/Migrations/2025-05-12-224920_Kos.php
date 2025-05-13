@@ -23,6 +23,7 @@ class Kos extends Migration
             'name' => [
                 'type' => 'VARCHAR',
                 'constraint' => '100',
+                'null' => true,
             ],
             'price' => [
                 'type' => 'INT',
@@ -73,9 +74,11 @@ class Kos extends Migration
             ],
             'created_at' => [
                 'type' => 'DATETIME',
+                'null' => true,
             ],
             'updated_at' => [
                 'type' => 'DATETIME',
+                'null' => true,
             ],
         ]);
 

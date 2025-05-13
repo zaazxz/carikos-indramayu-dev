@@ -21,9 +21,9 @@ $routes->get('/', 'Home::index');
 $routes->get('/dashboard', 'Dashboard::index');
 
 // Users
+$routes->get('/dashboard/users/create', 'User::create');
 $routes->get('/dashboard/users/edit/(:any)', 'User::edit/$1');
 $routes->get('/dashboard/users/(:any)', 'User::show/$1');
-$routes->get('/dashboard/users/create', 'User::create');
 $routes->get('/dashboard/users', 'User::index');
 $routes->post('/dashboard/users/delete/(:any)', 'User::delete/$1');
 $routes->post('/dashboard/users/update/(:any)', 'User::update/$1');
@@ -45,6 +45,15 @@ $routes->post('/dashboard/setting/update/(:any)', 'Setting::update/$1');
 $routes->get('/dashboard/jeniskos', 'JenisKos::index');
 $routes->post('/dashboard/jeniskos/update/(:any)', 'JenisKos::update/$1');
 
+// Kos
+$routes->get('/dashboard/kos/verification/(:any)', 'Kos::verification/$1');
+$routes->get('/dashboard/kos/edit/(:any)', 'Kos::edit/$1');
+$routes->get('/dashboard/kos/(:any)', 'Kos::show/$1');
+$routes->get('/dashboard/kos', 'Kos::index');
+$routes->get('/dashboard/kos/create', 'Kos::create');
+$routes->post('/dashboard/kos/store', 'Kos::store');
+$routes->post('/dashboard/kos/update/(:any)', 'Kos::update/$1');
+$routes->post('/dashboard/kos/delete/(:any)', 'Kos::delete/$1');
 
 /* Backend : End */
 
