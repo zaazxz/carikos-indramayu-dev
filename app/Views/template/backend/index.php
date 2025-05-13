@@ -143,6 +143,14 @@ $uri = service('uri');
   <!-- ./wrapper -->
 
   <!-- REQUIRED SCRIPTS -->
+  <script>
+    // Catch Data from redirecting
+    let successMessage = "<?php echo session()->getFlashdata('success'); ?>";
+
+    if (successMessage) {
+      alert(successMessage);
+    }
+  </script>
 
 </body>
 

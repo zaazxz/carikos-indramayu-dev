@@ -11,7 +11,7 @@
 
         <!-- Card Body : Start -->
         <div class="card-body">
-            <form action="/dashboard/kos/store" method="post" enctype="multipart/form-data">
+            <form action="/dashboard/kos/update/<?php echo $kos[0]['id']; ?>" method="post" enctype="multipart/form-data">
 
                 <!-- CSRF Token : Start -->
                 <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
@@ -31,7 +31,7 @@
                     <div class="col-3">
                         <div class="form-group">
                             <label>Nama Kos</label>
-                            <input name="name" value="<?php echo old('name') ?>" placeholder="CTH : Kos Putrajaya" class="form-control" id="name" type="text">
+                            <input name="name" value="<?php echo $kos[0]['name'] ?>" placeholder="CTH : Kos Putrajaya" class="form-control" id="name" type="text">
                             <p class="text-danger">
                                 <?php echo $validation->hasError('name') ? $validation->getError('name') : '' ?>
                             </p>
@@ -43,7 +43,7 @@
                     <div class="col-3">
                         <div class="form-group">
                             <label>Harga</label>
-                            <input name="price" value="<?php echo old('price') ?>" placeholder="CTH: 500.000" class="form-control" id="price" type="text">
+                            <input name="price" value="<?php echo $kos[0]['price'] ?>" placeholder="CTH: 500.000" class="form-control" id="price" type="text">
                             <p class="text-danger">
                                 <?php echo $validation->hasError('price') ? $validation->getError('price') : '' ?>
                             </p>
@@ -55,7 +55,7 @@
                     <div class="col-3">
                         <div class="form-group">
                             <label>Ketersediaan Kamar</label>
-                            <input type="number" name="available" value="<?php echo old('available') ?>" placeholder="Hanya angka" class="form-control" id="available">
+                            <input type="number" name="available" value="<?php echo $kos[0]['available'] ?>" placeholder="Hanya angka" class="form-control" id="available">
                             <p class="text-danger">
                                 <?php echo $validation->hasError('available') ? $validation->getError('available') : '' ?>
                             </p>
@@ -68,9 +68,8 @@
                         <div class="form-group">
                             <label>Jenis kos</label>
                             <select name="id_jenis" class="form-control" id="id_jenis">
-                                <option value="">--Pilih Jenis Kos--</option>
                                 <?php foreach ($jenis as $key => $value) { ?>
-                                    <option value="<?php echo $value['id'] ?>" <?php echo old('id') == $value['id'] ? 'selected' : '' ?>>
+                                    <option value="<?php echo $value['id'] ?>" <?php echo $kos[0]['id_jenis'] == $value['id'] ? 'selected' : '' ?>>
                                         <?php echo $value['type'] ?>
                                     </option>
                                 <?php } ?>
@@ -89,7 +88,7 @@
                 <div class="form-group">
                     <label>Coordinat Kos</label>
                     <div id="map" style="width: 100%; height: 500px;"></div>
-                    <input name="coordinat" id="Coordinat" value="<?php echo old('coordinat') ?>" placeholder="Coordinat Kos" class="form-control" hidden>
+                    <input name="coordinat" id="Coordinat" value="<?php echo $kos[0]['coordinat'] ?>" placeholder="Coordinat Kos" class="form-control" hidden>
                     <p class="text-danger">
                         <?php echo $validation->hasError('coordinat') ? $validation->getError('coordinat') : '' ?>
                     </p>
@@ -103,11 +102,10 @@
                         <div class="form-group">
                             <label>Kamar Mandi</label>
                             <select name="bathroom" class="form-control">
-                                <option value="">--Pilih Kamar Mandi--</option>
-                                <option value="Didalam" <?php echo (old('bathroom') == 'Didalam') ? 'selected' : '' ?>>
+                                <option value="Didalam" <?php echo ($kos[0]['bathroom'] == 'Didalam') ? 'selected' : '' ?>>
                                     Didalam
                                 </option>
-                                <option value="Diluar" <?php echo (old('bathroom') == 'Diluar') ? 'selected' : '' ?>>
+                                <option value="Diluar" <?php echo ($kos[0]['bathroom'] == 'Diluar') ? 'selected' : '' ?>>
                                     Diluar
                                 </option>
                             </select>
@@ -123,11 +121,10 @@
                         <div class="form-group">
                             <label>Wifi</label>
                             <select name="wifi" class="form-control">
-                                <option value="">--Pilih Wifi--</option>
-                                <option value="Ada" <?php echo (old('wifi') == 'Tersedia') ? 'selected' : '' ?>>
+                                <option value="Tersedia" <?php echo ($kos[0]['wifi'] == 'Tersedia') ? 'selected' : '' ?>>
                                     Tersedia
                                 </option>
-                                <option value="Tidak Tersedia" <?php echo (old('wifi') == 'Tidak Tersedia') ? 'selected' : '' ?>>
+                                <option value="Tidak Tersedia" <?php echo ($kos[0]['wifi'] == 'Tidak Tersedia') ? 'selected' : '' ?>>
                                     Tidak Tersedia
                                 </option>
                             </select>
@@ -143,11 +140,10 @@
                         <div class="form-group">
                             <label>AC</label>
                             <select name="air_conditioner" class="form-control">
-                                <option value="">--Pilih air_conditioner--</option>
-                                <option value="Ada" <?php echo (old('air_conditioner') == 'Tersedia') ? 'selected' : '' ?>>
+                                <option value="Tersedia" <?php echo ($kos[0]['air_conditioner'] == 'Tersedia') ? 'selected' : '' ?>>
                                     Tersedia
                                 </option>
-                                <option value="Tidak Tersedia" <?php echo (old('air_conditioner') == 'Tidak Tersedia') ? 'selected' : '' ?>>
+                                <option value="Tidak Tersedia" <?php echo ($kos[0]['air_conditioner'] == 'Tidak Tersedia') ? 'selected' : '' ?>>
                                     Tidak Tersedia
                                 </option>
                             </select>
@@ -165,14 +161,13 @@
                         <div class="form-group">
                             <label>Status Banjir</label>
                             <select name="flood_info" class="form-control">
-                                <option value="">--Pilih Status Banjir--</option>
-                                <option value="Aman" <?php echo (old('flood_info') == 'Aman') ? 'selected' : '' ?>>
+                                <option value="Aman" <?php echo ($kos[0]['flood_info'] == 'Aman') ? 'selected' : '' ?>>
                                     Aman
                                 </option>
-                                <option value="Siaga" <?php echo (old('flood_info') == 'Siaga') ? 'selected' : '' ?>>
+                                <option value="Siaga" <?php echo ($kos[0]['flood_info'] == 'Siaga') ? 'selected' : '' ?>>
                                     Siaga
                                 </option>
-                                <option value="Rawan" <?php echo (old('flood_info') == 'Rawan') ? 'selected' : '' ?>>
+                                <option value="Rawan" <?php echo ($kos[0]['flood_info'] == 'Rawan') ? 'selected' : '' ?>>
                                     Rawan
                                 </option>
                             </select>
@@ -188,9 +183,8 @@
                         <div class="form-group">
                             <label>Desa / Kelurahan</label>
                             <select name="id_wilayah" class="form-control">
-                                <option value="">--Pilih Desa/Kelurahan---</option>
                                 <?php foreach ($wilayah as $key => $value) { ?>
-                                    <option value="<?php echo $value['id'] ?>" <?php echo (old('id') == $value['id']) ? 'selected' : '' ?>>
+                                    <option value="<?php echo $value['id'] ?>" <?php echo ($kos[0]['id_wilayah'] == $value['id']) ? 'selected' : '' ?>>
                                         <?php echo $value['name'] ?>
                                     </option>
                                 <?php  } ?>
@@ -203,7 +197,7 @@
                     <div class="col-4">
                         <div class="form-group">
                             <label>Foto Kos</label>
-                            <input type="file" accept=".jpg, .jpeg, .png" name="photo" value="<?php echo old('photo') ?>" class="form-control" required>
+                            <input type="file" accept=".jpg, .jpeg, .png" name="photo" value="<?php echo $kos[0]['photo'] ?>" class="form-control" required>
                             <p class="text-danger">
                                 <?php echo $validation->hasError('photo') ? $validation->getError('photo') : '' ?>
                             </p>
@@ -218,7 +212,7 @@
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>Alamat</label>
-                            <textarea name="address" class="form-control" id="address" style="height: 100px; resize: none" placeholder="Alamat Kos"><?php echo old('address') ?></textarea>
+                            <textarea name="address" class="form-control" id="address" style="height: 100px; resize: none" placeholder="Alamat Kos"><?php echo $kos[0]['address'] ?></textarea>
                             <p class="text-danger">
                                 <?php echo $validation->hasError('address') ? $validation->getError('address') : '' ?>
                             </p>
@@ -283,7 +277,7 @@
 
     var coordinatInput = document.querySelector("[name=coordinat]");
 
-    var curLocation = [<?php echo $setting[0]['coordinat'] ?>];
+    var curLocation = [<?php echo $kos[0]['coordinat'] ?>];
     map.attributionControl.setPrefix(false);
     var marker = new L.marker(curLocation, {
         draggable: 'true',
