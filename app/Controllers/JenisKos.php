@@ -11,6 +11,13 @@ class JenisKos extends BaseController
 
     protected $jenisKosModel;
 
+/*************  ✨ Windsurf Command ⭐  *************/
+    /**
+     * Constructor for JenisKos controller.
+     * Initializes the JenisKosModel instance.
+     */
+
+/*******  17ff9657-01ed-464e-82fd-6ca2d13383ab  *******/
     public function __construct()
     {
         $this->jenisKosModel = new JenisKosModel();

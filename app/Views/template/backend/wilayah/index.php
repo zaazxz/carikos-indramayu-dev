@@ -6,9 +6,15 @@
             </h3>
 
             <div class="card-tools">
-                <a href="/dashboard/wilayah/create" class="btn btn-flat btn-primary btn-sm">
-                    <i class="fas fa-plus"></i> Tambah
-                </a>
+
+                <!-- Check if Verified : Start -->
+                <?php if (session()->get('status') == "Verified") : ?>
+                    <a href="/dashboard/wilayah/add" class="btn btn-sm btn-primary btn-flat">
+                        <i class="fas fa-plus"></i> Tambah Wilayah
+                    </a>
+                <?php endif; ?>
+                <!-- Check if Verified : End -->
+
             </div>
         </div>
         <div class="card-body">
@@ -18,7 +24,9 @@
                         <th width="50px">No</th>
                         <th>Nama Wilayah</th>
                         <th>Warna</th>
-                        <th width="100px">Aksi</th>
+                        <?php if (session()->get('status') == "Verified") : ?>
+                            <th>Aksi</th>
+                        <?php endif; ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,12 +36,14 @@
                             <td><?php echo $no++ ?></td>
                             <td><?php echo $value['name'] ?></td>
                             <td style="background-color: <?php echo $value['warna'] ?> ;"></td>
-                            <td class="text-center">
-                                <a href="/dashboard/wilayah/edit/<?php echo $value['id'] ?>" class="btn btn-sm btn-warning btn-flat"><i class="fas fa-pencil-alt"></i></a>
-                                <form action="/dashboard/wilayah/delete/<?php echo $value['id'] ?>" method="post" enctype="multipart/form-data" onsubmit="return confirm('Apakah anda yakin ingin menghapus data ini?')" style="display: inline-block;">
-                                    <button type="submit" class="btn btn-sm btn-danger btn-flat"><i class="fas fa-trash"></i></button>
-                                </form>
-                            </td>
+                            <?php if (session()->get('status') == "Verified") : ?>
+                                <td class="text-center">
+                                    <a href="/dashboard/wilayah/edit/<?php echo $value['id'] ?>" class="btn btn-sm btn-warning btn-flat"><i class="fas fa-pencil-alt"></i></a>
+                                    <form action="/dashboard/wilayah/delete/<?php echo $value['id'] ?>" method="post" enctype="multipart/form-data" onsubmit="return confirm('Apakah anda yakin ingin menghapus data ini?')" style="display: inline-block;">
+                                        <button type="submit" class="btn btn-sm btn-danger btn-flat"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </td>
+                            <?php endif; ?>
                         </tr>
                     <?php } ?>
                 </tbody>

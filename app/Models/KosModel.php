@@ -16,7 +16,18 @@ class KosModel extends Model
     public function getData()
     {
         return $this->db->table('kos')
-            ->select('kos.*, jenis_kos.type as type, users.name as owner, wilayah.name as wilayah')
+            ->select(
+                '
+                kos.*,
+
+                jenis_kos.type as type,
+                jenis_kos.marker as marker,
+
+                users.name as owner,
+                users.phone as phone,
+
+                wilayah.name as wilayah'
+            )
             ->join('jenis_kos', 'jenis_kos.id = kos.id_jenis')
             ->join('users', 'users.id = kos.id_user')
             ->join('wilayah', 'wilayah.id = kos.id_wilayah')
@@ -62,5 +73,32 @@ class KosModel extends Model
     public function getDataWhereWilayah($id_wilayah)
     {
         return $this->db->table('kos')->where('id_wilayah', $id_wilayah)->get()->getResultArray();
+    }
+
+    public function getFilteredData($wilayah = null, $type = null)
+    {
+        $builder = $this->db->table('kos');
+        $builder->select(
+            '
+        kos.*,
+        jenis_kos.type as type,
+        jenis_kos.marker as marker,
+        users.name as owner,
+        users.phone as phone,
+        wilayah.name as wilayah'
+        );
+        $builder->join('jenis_kos', 'jenis_kos.id = kos.id_jenis');
+        $builder->join('users', 'users.id = kos.id_user');
+        $builder->join('wilayah', 'wilayah.id = kos.id_wilayah');
+
+        if ($wilayah) {
+            $builder->where('kos.id_wilayah', $wilayah);
+        }
+
+        if ($type) {
+            $builder->where('kos.id_jenis', $type);
+        }
+
+        return $builder->get()->getResultArray();
     }
 }

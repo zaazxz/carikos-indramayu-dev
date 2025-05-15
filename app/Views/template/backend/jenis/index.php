@@ -15,7 +15,9 @@
                         <th width="50px">No</th>
                         <th>Jenis Kos</th>
                         <th>Marker</th>
-                        <th width="150px">Aksi</th>
+                        <?php if (session()->get('status') == "Verified") : ?>
+                            <th width="150px">Aksi</th>
+                        <?php endif; ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,9 +27,11 @@
                             <td><?php echo $no++ ?></td>
                             <td class="text-center"><?php echo $value['type'] ?></td>
                             <td class="text-center"><img src="<?php echo base_url('upload/marker/' . $value['marker']) ?>" width="75px"></td>
-                            <td class="text-center">
-                                <button data-toggle="modal" data-target="#edit<?php echo $value['id'] ?>" class="btn btn-sm btn-warning btn-flat"><i class="fas fa-map-marker-alt"></i> Ganti Marker</button>
-                            </td>
+                            <?php if (session()->get('status') == "Verified") : ?>
+                                <td class="text-center">
+                                    <button data-toggle="modal" data-target="#edit<?php echo $value['id'] ?>" class="btn btn-sm btn-warning btn-flat"><i class="fas fa-map-marker-alt"></i> Ganti Marker</button>
+                                </td>
+                            <?php endif; ?>
                         </tr>
                     <?php } ?>
                 </tbody>

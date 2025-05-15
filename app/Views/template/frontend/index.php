@@ -1,21 +1,24 @@
+<?php 
+
+  $uri = service('uri');
+
+?>
+
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
+
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Carikos-Indramayu | Title</title>
+  <title> Carikos-Indramayu | <?php echo $title ?></title>
 
   <!-- Google Font (Source Sans Pro) : Start -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Google Font (Source Sans Pro) : End -->
 
   <!-- Font Awesome Icons : Start -->
-  <link rel="stylesheet" href="<?= base_url('assets') ?>/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="<?php echo base_url('assets') ?>/plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Font Awesome Icons : End -->
 
@@ -39,10 +42,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <?php echo view('components/navbar/index'); ?>
     <!-- Navbar : End -->
 
-    <!-- Sidebar : Start -->
-    <?php echo view('components/sidebar/index'); ?>
-    <!-- Sidebar : End -->
-
     <!-- Content Wrapper : Start -->
     <div class="content-wrapper">
       <div class="content">
@@ -51,9 +50,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
           
           <!-- Your Content Here : Start -->
           <?php
-          //   if ($page) {
-          //     echo view($page);
-          //   }
+            if ($page) {
+              echo view($page);
+            }
           ?>
           <!-- Your Content Here : End -->
 
@@ -63,29 +62,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
     <!-- Content Wrapper : End -->
 
-    <!-- Main Footer : Start -->
-    <footer class="main-footer">
-      <!-- To the right -->
-      <div class="float-right d-none d-sm-inline">
-        Anything you want
-      </div>
-      <!-- Default to the left -->
-      <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-    </footer>
-    <!-- Main Footer : End -->
-
   </div>
 
   <!-- jQuery : Start -->
-  <script src="<?= base_url('assets') ?>/plugins/jquery/jquery.min.js"></script>
+  <script src="<?php echo base_url('assets') ?>/plugins/jquery/jquery.min.js"></script>
   <!-- jQuery : End -->
 
   <!-- Bootstrap 4 : Start -->
-  <script src="<?= base_url('assets') ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?php echo base_url('assets') ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- Bootstrap 4 : End -->
 
   <!-- assets App : Start -->
-  <script src="<?= base_url('assets') ?>/dist/js/adminlte.min.js"></script>
+  <script src="<?php echo base_url('assets') ?>/dist/js/adminlte.min.js"></script>
   <!-- assets App : End -->
 
 </body>
