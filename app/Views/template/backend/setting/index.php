@@ -19,7 +19,7 @@
                 <!-- CSRF token : Start -->
                 <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
                 <!-- CSRF token : End -->
-                
+
                 <!-- Form Input : Start -->
                 <div class="row">
                     <div class="col-6">
@@ -38,7 +38,9 @@
                 </div>
                 <!-- Form Input : End -->
 
-                <button type="submit" class="btn btn-primary btn-block">Simpan</button>
+                <?php if (session()->get('status') == 'Verified') : ?>
+                    <button type="submit" class="btn btn-primary btn-block">Simpan</button>
+                <?php endif; ?>
 
             </form>
 

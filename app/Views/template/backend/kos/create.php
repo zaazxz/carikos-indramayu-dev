@@ -124,7 +124,7 @@
                             <label>Wifi</label>
                             <select name="wifi" class="form-control">
                                 <option value="">--Pilih Wifi--</option>
-                                <option value="Ada" <?php echo (old('wifi') == 'Tersedia') ? 'selected' : '' ?>>
+                                <option value="Tersedia" <?php echo (old('wifi') == 'Tersedia') ? 'selected' : '' ?>>
                                     Tersedia
                                 </option>
                                 <option value="Tidak Tersedia" <?php echo (old('wifi') == 'Tidak Tersedia') ? 'selected' : '' ?>>
@@ -144,7 +144,7 @@
                             <label>AC</label>
                             <select name="air_conditioner" class="form-control">
                                 <option value="">--Pilih air_conditioner--</option>
-                                <option value="Ada" <?php echo (old('air_conditioner') == 'Tersedia') ? 'selected' : '' ?>>
+                                <option value="Tersedia" <?php echo (old('air_conditioner') == 'Tersedia') ? 'selected' : '' ?>>
                                     Tersedia
                                 </option>
                                 <option value="Tidak Tersedia" <?php echo (old('air_conditioner') == 'Tidak Tersedia') ? 'selected' : '' ?>>

@@ -51,7 +51,8 @@ class Kos extends BaseController
         return view('template/backend/index', $data);
     }
 
-    public function store() {
+    public function store()
+    {
 
         // Getting Photo
         $photo = $this->request->getFile('photo');
@@ -86,17 +87,17 @@ class Kos extends BaseController
 
         // Insert Data
         $this->kosModel->insert($data);
-       
+
         // Redirect
         if ($this->kosModel->errors()) {
             return redirect()->to('/dashboard/kos')->withInput()->with('error', $this->kosModel->errors());
         } else {
             return redirect()->to('/dashboard/kos')->with('success', 'Data berhasil ditambahkan');
         }
-
     }
 
-    public function show($id) {
+    public function show($id)
+    {
 
         // Getting user name
         $kos = $this->kosModel->getDataWhere($id);
@@ -112,8 +113,9 @@ class Kos extends BaseController
     }
 
     // Change Status
-    public function verification($id) {
-        
+    public function verification($id)
+    {
+
         // Data
         $data = [
             'status' => "Verified",
@@ -122,16 +124,16 @@ class Kos extends BaseController
 
         // Update
         $this->kosModel->update($id, $data);
-        
+
         if ($this->kosModel->errors()) {
             return redirect()->to('/dashboard/kos')->withInput()->with('error', $this->kosModel->errors());
         } else {
             return redirect()->to('/dashboard/kos')->with('success', 'Data berhasil diverifikasi');
         }
-
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
 
         // Data
         $kos = $this->kosModel->getDataWhere($id);
@@ -148,32 +150,52 @@ class Kos extends BaseController
         return view('template/backend/index', $data);
     }
 
-    public function update($id) {
+    public function update($id)
+    {
 
-        // Getting Photo
         $photo = $this->request->getFile('photo');
+        $old_data = $this->kosModel->find($id);
 
-        // Getting Name File
-        $name_file = $photo->getName();
+        if ($photo && $photo->isValid() && !$photo->hasMoved()) {
+            $name_file = $photo->getRandomName();
+            $photo->move(ROOTPATH . 'public/upload/photo', $name_file);
 
-        // Move to Folder
-        $photo->move(ROOTPATH . 'public/upload/photo', $name_file);
+            // Hapus file lama kalau ada
+            if (!empty($old_data['photo']) && file_exists(ROOTPATH . 'public/upload/photo/' . $old_data['photo'])) {
+                unlink(ROOTPATH . 'public/upload/photo/' . $old_data['photo']);
+            }
+        } else {
+            // Kalau tidak upload foto baru & di database juga kosong
+            $name_file = $old_data['photo'] ?? null;
+        }
 
         $data = [
-            'name' => $this->request->getPost('name'),
-            'id_jenis' => $this->request->getPost('id_jenis'),
-            'price' => $this->request->getPost('price'),
-            'available' => $this->request->getPost('available'),
-            'coordinat' => $this->request->getPost('coordinat'),
-            'photo' => $name_file,
-            'address' => $this->request->getPost('address'),
-            'bathroom' => $this->request->getPost('bathroom'),
-            'air_conditioner' => $this->request->getPost('air_conditioner'),
-            'wifi' => $this->request->getPost('wifi'),
-            'id_wilayah' => $this->request->getPost('id_wilayah'),
-            'flood_info' => $this->request->getPost('flood_info'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'name'              => $this->request->getPost('name'),
+            'id_jenis'          => $this->request->getPost('id_jenis'),
+            'price'             => $this->request->getPost('price'),
+            'available'         => $this->request->getPost('available'),
+            'coordinat'         => $this->request->getPost('coordinat'),
+            'photo'             => $name_file,
+            'address'           => $this->request->getPost('address'),
+            'bathroom'          => $this->request->getPost('bathroom'),
+            'air_conditioner'   => $this->request->getPost('air_conditioner'),
+            'wifi'              => $this->request->getPost('wifi'),
+            'id_wilayah'        => $this->request->getPost('id_wilayah'),
+            'flood_info'        => $this->request->getPost('flood_info'),
+            'updated_at'        => date('Y-m-d H:i:s')
         ];
+
+        $this->kosModel->update($id, $data);
+
+        if ($this->kosModel->errors()) {
+            return redirect()->to('/dashboard/kos')->withInput()->with('error', $this->kosModel->errors());
+        } else {
+            return redirect()->to('/dashboard/kos')->with('success', 'Data berhasil diubah');
+        }
+    }
+
+    public function delete($id)
+    {
 
         // Getting old photo
         $old_photo = $this->kosModel->find($id);
@@ -181,16 +203,12 @@ class Kos extends BaseController
         // unlink old photo
         unlink(ROOTPATH . 'public/upload/photo/' . $old_photo['photo']);
 
-        // Update Data
-        $this->kosModel->update($id, $data);
-        
-        // Redirect
+        $this->kosModel->delete($id);
+
         if ($this->kosModel->errors()) {
-            return redirect()->to('/dashboard/kos')->withInput()->with('error', $this->kosModel->errors());
+            return redirect()->to('/dashboard/kos')->with('error', $this->kosModel->errors());
         } else {
-            return redirect()->to('/dashboard/kos')->with('success', 'Data berhasil diubah');
+            return redirect()->to('/dashboard/kos')->with('success', 'Data berhasil dihapus');
         }
-
     }
-
 }

@@ -15,12 +15,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Google Font (Source Sans Pro) : End -->
 
     <!-- Font Awesome Icons : Start -->
-    <link rel="stylesheet" href="<?= base_url('assets') ?>/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('assets') ?>/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Font Awesome Icons : End -->
 
     <!-- Theme style : Start -->
-    <link rel="stylesheet" href="<?= base_url('assets') ?>/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('assets') ?>/dist/css/adminlte.min.css">
     <!-- Theme style : End -->
 
     <!-- leaflet : Start -->
@@ -136,87 +136,98 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Form Card : Start -->
     <div class="register-box">
         <div class="register-logo">
-            <a href="../../index2.html"><b>Login</b></a>
+            <p><b>Login</b></p>
         </div>
 
         <!-- Form Box : Start -->
         <div class="card">
             <div class="card-body register-card-body">
-                <?php $errors = session()->getFlashdata('errors'); ?>
-                <?php if (! empty($errors)): ?>
-                    <div class="alert alert-danger" role="alert">
-                        <ul>
-                            <?php foreach ($errors as $error): ?>
-                                <li><?= esc($error) ?></li>
-                            <?php endforeach ?>
-                        </ul>
-                    </div>
-                <?php endif ?>
-                <?php
-                if (session()->getFlashdata('pesan')) {
-                    echo '<div class="alert alert-success" role="alert">';
-                    echo session()->getFlashdata('pesan');
-                    echo '</div>';
-                } ?>
                 <p class="login-box-msg">Silahkan Melakukan Login</p>
 
-                <div class="input-group mb-3">
-                    <input type="email" name="email" class="form-control" placeholder="Email">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
+
+                <!-- Form : Start -->
+                <form action="/login" method="post" enctype="multipart/form-data">
+
+                    <!-- Email : Start -->
+                    <div class="input-group mb-3">
+                        <input type="email" name="email" class="form-control" placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <!-- Email : End -->
 
-                <div class="input-group mb-3">
-                    <input type="password" name="password" class="form-control" placeholder="Password">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
+                    <!-- Password : Start -->
+                    <div class="input-group mb-3">
+                        <input type="password" name="password" class="form-control" placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <!-- Password : End -->
 
-                <div class="row">
-                    <div class="d-grid gap-2 col-6 mx-auto">
-                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    <div class="row">
+                        <div class="d-grid gap-2 col-12 mx-auto">
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        </div>
                     </div>
-                    <!-- /.col -->
+
+                </form>
+                <!-- Form : End -->
+
+                <!-- Divider : Start -->
+                <hr class="my-3 bg-gray light">
+                <!-- Divider : End -->
+
+                <!-- Lupa password & Register : Start -->
+                <div class="flex-col text-center"> 
+                    <div class="mb-0">
+                        <small class="mb-1">
+                            Belum punya akun?<a href="/register"> Register</a>
+                        </small>
+                    </div>
+                    <div class="mb-0">
+                        <small class="mb-1">
+                            <a href="/change-password">Lupa password</a>
+                        </small>
+                    </div>
                 </div>
-
-
+                <!-- Lupa password & Register : End -->
 
             </div>
-            <!-- /.form-box -->
         </div>
         <!-- Form Box : End -->
 
     </div>
     <!-- Form Card : End -->
 
-    <!-- jQuery : Start -->
-    <script>
-        window.setTimeout(function() {
-            $(".alert").fadeTo(500.0).slideUp(500, function() {
-                $(this).remove();
-            });
-        }, 3000);
-    </script>
-    <!-- jQuery : End -->
-
     <!-- jQuery Plugin : Start -->
-    <script src="<?= base_url('assets') ?>/plugins/jquery/jquery.min.js"></script>
+    <script src="<?php echo base_url('assets') ?>/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery Plugin : End -->
 
     <!-- Bootstrap 4 : Start -->
-    <script src="<?= base_url('assets') ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo base_url('assets') ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Bootstrap 4 : End -->
 
     <!-- AdminLTE : Start -->
-    <script src="<?= base_url('assets') ?>/dist/js/adminlte.min.js"></script>
+    <script src="<?php echo base_url('assets') ?>/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE : End -->
-    
+
+    <!-- Catching Error : Start -->
+    <script>
+        let error = "<?php echo session()->getFlashdata('error') ?>";
+        let success = "<?php echo session()->getFlashdata('success') ?>";
+
+        if (error) {
+            alert(error);
+        }
+    </script>
+    <!-- Catching Error : End -->
+
 </body>
 
 </html>

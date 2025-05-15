@@ -157,15 +157,23 @@
                     <!-- rekening Owner : End -->
 
                     <!-- CTA Button : Start -->
-                    <div class="col-6">
-                        <a href="#" class="btn btn-success btn-block">Pesan Sekarang!</a>
-                    </div>
+                    <?php if ($kos[0]['available'] > 0 && session()->get('level') == 'Pencari Kos') : ?>
+                        <div class="col-6">
+                            <a href="/pemesanan/create/<?php echo $kos[0]['id'] ?>" class="btn btn-success btn-block">Pesan Sekarang!</a>
+                        </div>
+
+                        <div class="col-6">
+                            <a href="/dashboard/kos" class="btn btn-danger btn-block">Kembali</a>
+                        </div>
+                    <?php endif ?>
                     <!-- CTA Button : End -->
 
                     <!-- Back Button : Start -->
-                    <div class="col-6">
-                        <a href="/dashboard/kos" class="btn btn-danger btn-block">Kembali</a>
-                    </div>
+                    <?php if (session()->get('level') == 'Pemilik Kos' || session()->get('level') == 'Admin') : ?>
+                        <div class="col-12">
+                            <a href="/dashboard/kos" class="btn btn-danger btn-block">Kembali</a>
+                        </div>
+                    <?php endif ?>
                     <!-- Back Button : End -->
 
                 </div>

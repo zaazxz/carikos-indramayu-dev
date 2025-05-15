@@ -197,7 +197,7 @@
                     <div class="col-4">
                         <div class="form-group">
                             <label>Foto Kos</label>
-                            <input type="file" accept=".jpg, .jpeg, .png" name="photo" value="<?php echo $kos[0]['photo'] ?>" class="form-control" required>
+                            <input type="file" accept=".jpg, .jpeg, .png" name="photo" value="<?php echo $kos[0]['photo'] ?>" class="form-control">
                             <p class="text-danger">
                                 <?php echo $validation->hasError('photo') ? $validation->getError('photo') : '' ?>
                             </p>
