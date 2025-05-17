@@ -4,15 +4,6 @@
         <!-- Car Header : Start -->
         <div class="card-header">
             <h3 class="card-title"><?php echo $title ?></h3>
-
-            <!-- Check if session level == "Pemilik Kos" : Start -->
-            <?php if (session()->get('level') == "Pemilik Kos") { ?>
-                <a class="float-right btn btn-primary btn-sm" href="/dashboard/kos/create">
-                    Tambah Data
-                </a>
-            <?php } ?>
-            <!-- Check if session level == "Pemilik Kos" : End -->
-
         </div>
 
         <!-- Card Body : Start -->
@@ -44,7 +35,22 @@
                                             <span class="badge badge-success">Verified</span>
                                         <?php } ?>
                                         <?php if ($value['status'] == "Pending") { ?>
-                                            <span class="badge badge-secondary">Pending</span>
+                                            
+                                            <?php if ($value['proof_of_payment'] == null) { ?>
+                                                <span class="badge badge-secondary">
+                                                    <span class="badge badge-warning badge-pill" data-toggle="tooltip" title="Belum Upload Bukti Pembayaran">
+                                                        !
+                                                    </span>
+                                                    Pending
+                                                </span>
+                                            <?php } ?>
+
+                                            <!-- If Pending && proof_of_payment not null : Start -->
+                                            <?php if ($value['proof_of_payment'] != null) { ?>
+                                                <span class="badge badge-secondary">Pending</span>
+                                            <?php } ?>
+                                            <!-- If Pending && proof_of_payment not null : End -->
+                                            
                                         <?php } ?>
                                         <?php if ($value['status'] == "Rejected") { ?>
                                             <span class="badge badge-danger">Rejected</span>
@@ -103,7 +109,7 @@
                                         </a>
 
                                         <!-- Uploading proof of payment : Start -->
-                                        <?php if ($value['proof_of_payment'] == null) { ?>
+                                        <?php if ($value['proof_of_payment'] == null && $value['status'] == "Pending") { ?>
 
                                             <!-- Opening Modal : Start -->
                                             <button class="btn btn-xs btn-warning btn-flat" data-toggle="modal" data-target="#uploadProof<?php echo $value['id'] ?>">
@@ -144,17 +150,19 @@
                         <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
                         <!-- CSRF token : End -->
 
+                        <!-- Check ID : <?php // echo $value['id'] ?> -->
+
                         <!-- Preview Image : Start -->
                         <div class="form-group">
                             <label for="">Preview Bukti Pembayaran</label>
-                            <img class="img-fluid" src="https://placehold.co/150x150?text=User&font=roboto" alt="Bukti Pembayaran" style="width: 100%; height: 132px; object-fit: cover" id="preview_proof_of_payment">
+                            <img class="img-fluid" src="https://placehold.co/150x150?text=User&font=roboto" alt="Bukti Pembayaran" style="width: 100%; height: 132px; object-fit: cover" id="preview_proof_of_payment<?php echo $value['id'] ?>">
                         </div>
                         <!-- Preview Image : End -->
 
                         <!-- File Input : Start -->
                         <div class="form-group">
                             <label for="proof_of_payment">Bukti Pembayaran</label>
-                            <input type="file" class="form-control" name="proof_of_payment" id="proof_of_payment">
+                            <input type="file" class="form-control" name="proof_of_payment" id="proof_of_payment<?php echo $value['id'] ?>">
                         </div>
                         <!-- File Input : End -->
                 </div>
@@ -201,8 +209,8 @@
 
 <!-- Preview Image : Start -->
 <script>
-    const proof_of_payment = document.getElementById('proof_of_payment');
-    const preview_proof_of_payment = document.getElementById('preview_proof_of_payment');
+    const proof_of_payment = document.getElementById('proof_of_payment<?php echo $value['id'] ?>');
+    const preview_proof_of_payment = document.getElementById('preview_proof_of_payment<?php echo $value['id'] ?>');
 
     // Preview Image : Start
     proof_of_payment.addEventListener('change', function() {
@@ -216,6 +224,5 @@
         }
     });
     // Preview Image : End
-
 </script>
 <!-- Preview Image : End -->
