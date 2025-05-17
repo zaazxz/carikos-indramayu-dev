@@ -49,7 +49,7 @@ if ($unverifiedPemesanan > 0) {
                 <a class="nav-link" data-toggle="dropdown" href="#">
                     <i class="far fa-bell"></i>
 
-                    <?php if ($unverifiedKos + $unverifiedUser > 0 || session()->get('level') == "Admin") : ?>
+                    <?php if ($unverifiedKos + $unverifiedUser > 0 && session()->get('level') == "Admin") : ?>
                         <span class="badge badge-warning navbar-badge">
                             <?php echo ($unverifiedKos + $unverifiedUser); ?>
                         </span>

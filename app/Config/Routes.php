@@ -49,6 +49,7 @@ $routes->group('', ['filter' => 'level:Admin, Pemilik Kos, Pencari Kos'], functi
 
     // Kos
     $routes->get('/dashboard/kos/verification/(:num)', 'Kos::verification/$1');
+    $routes->get('/dashboard/kos/flood/verification/(:num)', 'Kos::floodVerification/$1');
     $routes->get('/dashboard/kos/edit/(:num)', 'Kos::edit/$1', ['filter' => 'level:Pemilik Kos']);
     $routes->get('/dashboard/kos/(:num)', 'Kos::show/$1');
     $routes->get('/dashboard/kos', 'Kos::index');
@@ -68,6 +69,7 @@ $routes->group('', ['filter' => 'level:Admin, Pemilik Kos, Pencari Kos'], functi
     $routes->get('/pemesanan/create/(:num)', 'Pemesanan::create/$1', ['filter' => 'level:Pencari Kos']);
     $routes->get('/dashboard/pemesanan/detail/(:num)', 'Pemesanan::detail/$1');
     $routes->post('/pemesanan/store', 'Pemesanan::store', ['filter' => 'level:Pencari Kos']);
+    $routes->post('/dashboard/pemesanan/proof/(:num)', 'Pemesanan::updateProof/$1');
     $routes->get('/dashboard/pemesanan/approve/(:num)', 'Pemesanan::approve/$1');
     $routes->get('/dashboard/pemesanan/reject/(:num)', 'Pemesanan::reject/$1');
     $routes->get('/dashboard/pemesanan/delete/(:num)', 'Pemesanan::delete/$1');

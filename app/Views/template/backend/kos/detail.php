@@ -73,7 +73,7 @@
                     <!-- Address : End -->
 
                     <!-- Bathroom : Start -->
-                    <div class="col-3">
+                    <div class="col-4">
                         <div class="form-group">
                             <label>Kamar Mandi</label>
                             <input value="<?php echo $kos[0]['bathroom'] ?>" class="form-control" type="text" disabled>
@@ -82,7 +82,7 @@
                     <!-- Bathroom : End -->
 
                     <!-- AC : Start -->
-                    <div class="col-3">
+                    <div class="col-4">
                         <div class="form-group">
                             <label>Air Conditioner</label>
                             <input value="<?php echo $kos[0]['air_conditioner'] ?>" class="form-control" type="text" disabled>
@@ -91,7 +91,7 @@
                     <!-- AC : End -->
 
                     <!-- Wifi : Start -->
-                    <div class="col-3">
+                    <div class="col-4">
                         <div class="form-group">
                             <label>Internet</label>
                             <input value="<?php echo $kos[0]['wifi'] ?>" class="form-control" type="text" disabled>
@@ -100,7 +100,24 @@
                     <!-- Wifi : End -->
 
                     <!-- Flood Info : Start -->
-                    <div class="col-3">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>Status Banjir</label>
+                            <?php if ($kos[0]['flood_verification'] == "Unverified") : ?>
+                                <button class="btn btn-block btn-danger" disabled>
+                                    <?php echo $kos[0]['flood_verification'] ?>
+                                </button>
+                            <?php else : ?>
+                                <button class="btn btn-block btn-success" disabled>
+                                    <?php echo $kos[0]['flood_verification'] ?>
+                                </button>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <!-- Flood Info : End -->
+
+                    <!-- Flood Info : Start -->
+                    <div class="col-6">
                         <div class="form-group">
                             <label>Status Banjir</label>
                             <input value="<?php echo $kos[0]['flood_info'] ?>" class="form-control" type="text" disabled>

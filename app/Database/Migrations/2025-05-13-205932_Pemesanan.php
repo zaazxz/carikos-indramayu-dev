@@ -27,7 +27,7 @@ class Pemesanan extends Migration
             ],
             'proof_of_payment' => [
                 'type' => 'TEXT',
-                'null' => false,
+                'null' => true,
             ],
             'status' => [
                 'type' => 'ENUM',

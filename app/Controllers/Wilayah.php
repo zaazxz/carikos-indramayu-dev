@@ -79,7 +79,8 @@ class Wilayah extends BaseController
         $data = [
             'name' => $this->request->getPost('name'),
             'warna' => $this->request->getPost('warna'),
-            'geojson' => $geojson
+            // 'geojson' => $geojson
+            'geojson' => $this->request->getPost('geojson')
         ];
 
         // Inserting Data
@@ -122,7 +123,8 @@ class Wilayah extends BaseController
         // updating data
         $this->WilayahModel
             ->set([
-                'geojson' => $geojson,
+                // 'geojson' => $geojson,
+                'geojson' => $this->request->getPost('geojson'),
                 'name' => $this->request->getPost('name'),
                 'warna' => $this->request->getPost('warna')
             ])
