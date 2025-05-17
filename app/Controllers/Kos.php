@@ -211,4 +211,23 @@ class Kos extends BaseController
             return redirect()->to('/dashboard/kos')->with('success', 'Data berhasil dihapus');
         }
     }
+
+    public function floodVerification($id)
+    {
+
+        // Data
+        $data = [
+            'flood_verification' => "Verified",
+            'updated_at' => date('Y-m-d H:i:s')
+        ];
+
+        // Update
+        $this->kosModel->update($id, $data);
+
+        if ($this->kosModel->errors()) {
+            return redirect()->to('/dashboard/kos')->withInput()->with('error', $this->kosModel->errors());
+        } else {
+            return redirect()->to('/dashboard/kos')->with('success', 'Data berhasil diverifikasi');
+        }
+    }
 }

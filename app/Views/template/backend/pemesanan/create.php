@@ -94,7 +94,7 @@ $tanggal = Time::now('Asia/Jakarta')->toDateString();
                             <!-- Address : End -->
 
                             <!-- Bathroom : Start -->
-                            <div class="col-3">
+                            <div class="col-4">
                                 <div class="form-group">
                                     <label>Kamar Mandi</label>
                                     <input value="<?php echo $kos[0]['bathroom'] ?>" class="form-control" type="text" disabled>
@@ -103,7 +103,7 @@ $tanggal = Time::now('Asia/Jakarta')->toDateString();
                             <!-- Bathroom : End -->
 
                             <!-- AC : Start -->
-                            <div class="col-3">
+                            <div class="col-4">
                                 <div class="form-group">
                                     <label>Air Conditioner</label>
                                     <input value="<?php echo $kos[0]['air_conditioner'] ?>" class="form-control" type="text" disabled>
@@ -112,7 +112,7 @@ $tanggal = Time::now('Asia/Jakarta')->toDateString();
                             <!-- AC : End -->
 
                             <!-- Wifi : Start -->
-                            <div class="col-3">
+                            <div class="col-4">
                                 <div class="form-group">
                                     <label>Internet</label>
                                     <input value="<?php echo $kos[0]['wifi'] ?>" class="form-control" type="text" disabled>
@@ -121,13 +121,65 @@ $tanggal = Time::now('Asia/Jakarta')->toDateString();
                             <!-- Wifi : End -->
 
                             <!-- Flood Info : Start -->
-                            <div class="col-3">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label>Status Banjir</label>
                                     <input value="<?php echo $kos[0]['flood_info'] ?>" class="form-control" type="text" disabled>
                                 </div>
                             </div>
                             <!-- Flood Info : End -->
+
+                            <!-- Flood Info : Start -->
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Status Banjir</label>
+                                    <?php if ($kos[0]['flood_verification'] == "Unverified") : ?>
+                                        <button class="btn btn-block btn-danger" disabled>
+                                            <?php echo $kos[0]['flood_verification'] ?>
+                                        </button>
+                                    <?php elseif ($kos[0]['flood_verification'] == "Verified") : ?>
+                                        <button class="btn btn-block btn-success" disabled>
+                                            <?php echo $kos[0]['flood_verification'] ?>
+                                        </button>
+                                    <?php endif ?>
+                                </div>
+                            </div>
+                            <!-- Flood Info : End -->
+
+                        </div>
+                    </div>
+                    <!-- Detail : End -->
+
+                    <!-- Data Pemesan : Start -->
+                    <div class="col-md-6 col-12 p-3">
+                        <div class="row">
+
+                            <!-- Name Reserver : Start -->
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Nama Penyewa</label>
+                                    <input value="<?php echo session()->get('name') ?>" class="form-control" type="text" disabled>
+                                </div>
+                            </div>
+                            <!-- Name Reserver : End -->
+
+                            <!-- Tanggal mulai sewa : Start -->
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Tanggal Mulai Sewa</label>
+                                    <input value="<?php echo Time::now('Asia/Jakarta')->format('l, d M Y') ?>" class="form-control" type="text" disabled>
+                                </div>
+                            </div>
+                            <!-- Tanggal mulai sewa : End -->
+
+                            <!-- Tanggal mulai sewa : Start -->
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Tanggal Akhir Sewa</label>
+                                    <input value="<?php echo Time::now('Asia/Jakarta')->addMonths(1)->format('l, d M Y') ?>" class="form-control" type="text" disabled>
+                                </div>
+                            </div>
+                            <!-- Tanggal mulai sewa : End -->
 
                             <!-- Owner : Start -->
                             <div class="col-3">
@@ -176,50 +228,6 @@ $tanggal = Time::now('Asia/Jakarta')->toDateString();
                                 </div>
                             </div>
                             <!-- rekening Owner : End -->
-
-                        </div>
-                    </div>
-                    <!-- Detail : End -->
-
-                    <!-- Data Pemesan : Start -->
-                    <div class="col-md-6 col-12 p-3">
-                        <div class="row">
-
-                            <!-- Name Reserver : Start -->
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Nama Penyewa</label>
-                                    <input value="<?php echo session()->get('name') ?>" class="form-control" type="text" disabled>
-                                </div>
-                            </div>
-                            <!-- Name Reserver : End -->
-
-                            <!-- Tanggal mulai sewa : Start -->
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Tanggal Mulai Sewa</label>
-                                    <input value="<?php echo Time::now('Asia/Jakarta')->format('l, d M Y') ?>" class="form-control" type="text" disabled>
-                                </div>
-                            </div>
-                            <!-- Tanggal mulai sewa : End -->
-
-                            <!-- Tanggal mulai sewa : Start -->
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Tanggal Akhir Sewa</label>
-                                    <input value="<?php echo Time::now('Asia/Jakarta')->addMonths(1)->format('l, d M Y') ?>" class="form-control" type="text" disabled>
-                                </div>
-                            </div>
-                            <!-- Tanggal mulai sewa : End -->
-
-                            <!-- Tanggal mulai sewa : Start -->
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Bukti Pembayaran</label>
-                                    <input type="file" class="form-control" name="proof_of_payment" required>
-                                </div>
-                            </div>
-                            <!-- Tanggal mulai sewa : End -->
 
                             <!-- CTA Button : Start -->
                             <?php if ($kos[0]['available'] > 0 && session()->get('level') == 'Pencari Kos') : ?>

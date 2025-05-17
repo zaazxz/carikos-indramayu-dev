@@ -27,7 +27,7 @@
                         <th>Ketersediaan kamar</th>
                         <th>Harga</th>
                         <th>Jenis Kos</th>
-                        <th>Status Banjir</th>
+                        <th colspan="2">Status Banjir</th>
                         <th>Status Verifikasi</th>
                         <th>Aksi</th>
                     </tr>
@@ -44,6 +44,18 @@
                                     <td class="text-center">Rp. <?php echo number_format($value['price'], 0, ',', '.') ?></td>
                                     <td class="text-center"><?php echo $value['type'] ?></td>
                                     <td class="text-center"><?php echo $value['flood_info'] ?></td>
+                                    <td class="text-center">
+                                        <?php if ($value['flood_verification'] == "Verified") { ?>
+                                            <span class="badge badge-success">Verified</span>
+                                        <?php } ?>
+                                        <?php if ($value['flood_verification'] == "Unverified") { ?>
+                                            <?php if (session()->get('level') == "Admin") : ?>
+                                                <a href="/dashboard/kos/flood/verification/<?php echo $value['id'] ?>" class="badge badge-danger" onclick="return confirm('Yakin Verifikasi Data..?')">Unverified</a>
+                                            <?php elseif (session()->get('level') == "Pemilik Kos") : ?>
+                                                <span class="badge badge-danger">Unverified</span>
+                                            <?php endif; ?>
+                                        <?php } ?>
+                                    </td>
                                     <td class="text-center">
                                         <?php if ($value['status'] == "Verified") { ?>
                                             <span class="badge badge-success">Verified</span>
@@ -89,6 +101,18 @@
                                     <td class="text-center"><?php echo $value['type'] ?></td>
                                     <td class="text-center"><?php echo $value['flood_info'] ?></td>
                                     <td class="text-center">
+                                        <?php if ($value['flood_verification'] == "Verified") { ?>
+                                            <span class="badge badge-success">Verified</span>
+                                        <?php } ?>
+                                        <?php if ($value['flood_verification'] == "Unverified") { ?>
+                                            <?php if (session()->get('level') == "Admin") : ?>
+                                                <a href="/dashboard/kos/flood/verification/<?php echo $value['id'] ?>" class="badge badge-danger" onclick="return confirm('Yakin Verifikasi Data..?')">Unverified</a>
+                                            <?php elseif (session()->get('level') == "Pemilik Kos") : ?>
+                                                <span class="badge badge-danger">Unverified</span>
+                                            <?php endif; ?>
+                                        <?php } ?>
+                                    </td>
+                                    <td class="text-center">
                                         <?php if ($value['status'] == "Verified") { ?>
                                             <span class="badge badge-success">Verified</span>
                                         <?php } ?>
@@ -131,6 +155,18 @@
                                     <td class="text-center">Rp. <?php echo number_format($value['price'], 0, ',', '.') ?></td>
                                     <td class="text-center"><?php echo $value['type'] ?></td>
                                     <td class="text-center"><?php echo $value['flood_info'] ?></td>
+                                    <td class="text-center">
+                                        <?php if ($value['flood_verification'] == "Verified") { ?>
+                                            <span class="badge badge-success">Verified</span>
+                                        <?php } ?>
+                                        <?php if ($value['flood_verification'] == "Unverified") { ?>
+                                            <?php if (session()->get('level') == "Admin") : ?>
+                                                <a href="/dashboard/kos/flood/verification/<?php echo $value['id'] ?>" class="badge badge-danger" onclick="return confirm('Yakin Verifikasi Data..?')">Unverified</a>
+                                            <?php elseif (session()->get('level') == "Pemilik Kos") : ?>
+                                                <span class="badge badge-danger">Unverified</span>
+                                            <?php endif; ?>
+                                        <?php } ?>
+                                    </td>
                                     <td class="text-center">
                                         <?php if ($value['status'] == "Verified") { ?>
                                             <span class="badge badge-success">Verified</span>

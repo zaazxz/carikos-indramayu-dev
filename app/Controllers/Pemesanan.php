@@ -91,26 +91,29 @@ class Pemesanan extends BaseController
         // getting now date
         $nowDate = Time::now('Asia/Jakarta')->format('d-M-Y');
 
-        // Getting file name
-        $fileName = $file->getName();
+        if ($file) {
 
-        // Getting file extension
-        $fileExtension = $file->getClientExtension();
+            // Getting file name
+            $fileName = $file->getName();
 
-        // Getting random name
-        $randomName = bin2hex(random_bytes(10));
+            // Getting file extension
+            $fileExtension = $file->getClientExtension();
 
-        // Generate new file name
-        $newFileName = $userName . "_" . $nowDate . '_' . $randomName . '.' . $fileExtension;
+            // Getting random name
+            $randomName = bin2hex(random_bytes(10));
 
-        // Move file to folder
-        $file->move(ROOTPATH . 'public/upload/pemesanan', $newFileName);
+            // Generate new file name
+            $newFileName = $userName . "_" . $nowDate . '_' . $randomName . '.' . $fileExtension;
+
+            // Move file to folder
+            $file->move(ROOTPATH . 'public/upload/pemesanan', $newFileName);
+        }
 
         // Save data to database
         $data = [
             'id_user' => session()->get('id'),
             'id_kos' => $this->request->getPost('id_kost'),
-            'proof_of_payment' => $newFileName,
+            'proof_of_payment' => null,
             'status' => 'Pending',
             'start_date' => Time::now('Asia/Jakarta')->format('Y-m-d'),
             'outstanding_balance' => Time::now('Asia/Jakarta')->addMonths(1)->format('Y-m-d'),
@@ -152,7 +155,7 @@ class Pemesanan extends BaseController
             'updated_at' => Time::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
         ];
 
-        $this->kosModel->update( $this->pemesananModel->getDataById($id)['id_kos'] ,$dataKos);
+        $this->kosModel->update($this->pemesananModel->getDataById($id)['id_kos'], $dataKos);
         $this->pemesananModel->update($id, $data);
         return redirect()->to('/dashboard/pemesanan')->with('success', 'Data berhasil disimpan');
     }
@@ -192,6 +195,49 @@ class Pemesanan extends BaseController
         } else {
             return redirect()->to('/dashboard/pemesanan')->with('success', 'Data berhasil dihapus');
         }
+    }
+
+    // Upload proof of payment
+    public function updateProof($id)
+    {
+
+        // Getting file
+        $file = $this->request->getFile('proof_of_payment');
+
+        // Getting user name from session
+        $userName = session()->get('name');
+
+        // getting now date
+        $nowDate = Time::now('Asia/Jakarta')->format('d-M-Y');
+
+        if ($file) {
+
+            // Getting file extension
+            $fileExtension = $file->getClientExtension();
+
+            // Getting random name
+            $randomName = bin2hex(random_bytes(10));
+
+            // Generate new file name
+            $newFileName = $userName . "_" . $nowDate . '_' . $randomName . '.' . $fileExtension;
+
+            // Move file to folder
+            $file->move(ROOTPATH . 'public/upload/pemesanan', $newFileName);
+            
+        }
+
+        $data = [
+            'proof_of_payment' => $newFileName,
+            'updated_at' => Time::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
+        ];
+
+        $this->pemesananModel->update($id, $data);
         
+        if ($this->pemesananModel->errors()) {
+            return redirect()->back()->withInput()->with('errors', $this->pemesananModel->errors());
+        } else {
+            return redirect()->to('/dashboard/pemesanan')->with('success', 'Data berhasil disimpan');
+        }
+
     }
 }

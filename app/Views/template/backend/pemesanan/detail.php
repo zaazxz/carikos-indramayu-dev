@@ -213,7 +213,11 @@ $tanggal = Time::now('Asia/Jakarta')->toDateString();
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Bukti Pembayaran</label>
-                                    <img src="<?php echo base_url('/upload/pemesanan/' . $pemesanan['proof_of_payment']) ?>" class="img-fluid" alt="Bukti Pembayaran" style="width: 100%; height: 132px; object-fit: cover">
+                                    <?php if ($pemesanan['proof_of_payment'] == null) : ?>
+                                        <input value="Belum ada bukti pembayaran" class="form-control" type="text" disabled>
+                                    <?php else : ?>
+                                        <img src="<?php echo base_url('/upload/pemesanan/' . $pemesanan['proof_of_payment']) ?>" class="img-fluid" alt="Bukti Pembayaran" style="width: 100%; height: 132px; object-fit: cover">
+                                    <?php endif ?>
                                 </div>
                             </div>
                             <!-- Tanggal mulai sewa : End -->

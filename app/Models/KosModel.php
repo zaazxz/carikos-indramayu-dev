@@ -10,7 +10,7 @@ class KosModel extends Model
     // Variables
     protected $table = 'kos';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['name', 'id_jenis', 'price', 'available', 'id_user', 'coordinat', 'photo', 'address', 'bathroom', 'air_conditioner', 'wifi', 'id_wilayah', 'flood_info', 'status', 'created_at', 'updated_at'];
+    protected $allowedFields = ['name', 'id_jenis', 'price', 'available', 'id_user', 'coordinat', 'photo', 'address', 'bathroom', 'air_conditioner', 'wifi', 'id_wilayah', 'flood_info', 'flood_verification', 'status', 'created_at', 'updated_at'];
 
     // Function
     public function getData()

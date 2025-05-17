@@ -68,6 +68,11 @@ class Kos extends Migration
                 'type' => 'ENUM',
                 'constraint' => ['Aman', 'Siaga', 'Rawan'],
             ],
+            'flood_verification' => [
+                'type' => 'ENUM',
+                'constraint' => ['Verified', 'Unverified'],
+                'default' => 'Unverified',
+            ],
             'status' => [
                 'type' => 'ENUM',
                 'constraint' => ['Verified', 'Unverified'],

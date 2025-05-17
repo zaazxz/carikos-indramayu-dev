@@ -41,7 +41,8 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Warna Wilayah</label>
-                            <input type="color" name="warna" value="<?php echo $wilayah[0]['warna']; ?>" class="form-control" style="height: 40px; padding: 5px;" id="warna">
+                            <!-- <input type="color" name="warna" value="<?php // echo old('warna') ? old('warna') : '#3388ff' ?>" class="form-control" style="height: 40px; padding: 5px;"> -->
+                            <input type="text" name="warna" value="<?php echo $wilayah[0]['warna']; ?>" class="form-control" id="warna">
                             <p class="text-danger"><?php echo $validation->hasError('warna') ? $validation->getError('warna') : '' ?></p>
                         </div>
                     </div>
@@ -51,8 +52,8 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label>Gambar Wilayah (Polygon)</label>
-                            <div id="map" style="height: 400px;"></div>
-                            <input type="hidden" name="geojson" id="geojson" value='<?php echo json_encode($wilayah[0]['geojson']); ?>'>
+                            <!-- <div id="map" style="height: 400px;"></div> -->
+                            <textarea type="text" name="geojson" id="geojson" value="<?php echo old('geojson') ?>" class="form-control" style="height: 400px; width: 100%; resize: none"><?php echo $wilayah[0]['geojson']; ?></textarea>
                             <p class="text-danger"><?php echo $validation->hasError('geojson') ? $validation->getError('geojson') : '' ?></p>
                         </div>
                     </div>

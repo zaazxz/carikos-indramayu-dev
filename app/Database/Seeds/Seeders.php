@@ -194,6 +194,7 @@ class Seeders extends Seeder
                 'wifi' => 'Tersedia',
                 'id_wilayah' => '1',
                 'flood_info' => 'Aman',
+                'flood_verification' => 'Verified',
                 'status' => 'Verified',
                 'created_at' => date('Y-m-d H:i:s'),
             ]

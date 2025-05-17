@@ -9,7 +9,7 @@
 
                 <!-- Check if Verified : Start -->
                 <?php if (session()->get('status') == "Verified") : ?>
-                    <a href="/dashboard/wilayah/add" class="btn btn-sm btn-primary btn-flat">
+                    <a href="/dashboard/wilayah/create" class="btn btn-sm btn-primary btn-flat">
                         <i class="fas fa-plus"></i> Tambah Wilayah
                     </a>
                 <?php endif; ?>
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="card-body">
-            <table id="example2" class="table table-bordered table-striped">
+            <table id="example2" class="table table-bordered table-striped">`
                 <thead>
                     <tr class="text-center">
                         <th width="50px">No</th>
@@ -80,14 +80,25 @@
 
     var layerControl = L.control.layers(baseMaps).addTo(map);
 
-    <?php foreach ($wilayah as $key => $value) { ?>
-        L.geoJSON(<?php echo $value['geojson'] ?>, {
+    <?php foreach ($wilayah as $key => $value) { 
+        // biar aman cek dulu geojson-nya valid atau engga
+        if (!empty($value['geojson'])) { 
+            // pastikan JSON-nya valid, wrap pakai json_encode 
+            $geojsonData = json_encode(json_decode($value['geojson'])); 
+    ?>
+        try {
+            var geoLayer = L.geoJSON(<?php echo $geojsonData ?>, {
                 fillColor: '<?php echo $value['warna'] ?>',
                 fillOpacity: 0.3,
-            })
-            .bindPopup("<b><?php echo $value['name'] ?></b>")
-            .addTo(map);
-    <?php } ?>
+            }).bindPopup("<b><?php echo addslashes($value['name']) ?></b>");
+
+            geoLayer.addTo(map);
+        } catch (e) {
+            console.error('Error loading GeoJSON for wilayah: <?php echo addslashes($value['name']) ?>', e);
+        }
+    <?php 
+        } 
+    } ?>
 </script>
 
 <script>
