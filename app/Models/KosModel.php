@@ -75,7 +75,7 @@ class KosModel extends Model
         return $this->db->table('kos')->where('id_wilayah', $id_wilayah)->get()->getResultArray();
     }
 
-    public function getFilteredData($wilayah = null, $type = null)
+    public function getFilteredData($wilayah = null, $type = null, $price = null)
     {
         $builder = $this->db->table('kos');
         $builder->select(
@@ -97,6 +97,10 @@ class KosModel extends Model
 
         if ($type) {
             $builder->where('kos.id_jenis', $type);
+        }
+
+        if ($price) {
+            $builder->where('kos.price <=', $price);
         }
 
         return $builder->get()->getResultArray();
