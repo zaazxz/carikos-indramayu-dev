@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-  $uri = service('uri');
+$uri = service('uri');
 
 ?>
 
@@ -42,17 +42,21 @@
     <?php echo view('components/navbar/index'); ?>
     <!-- Navbar : End -->
 
+    <!-- Sidebar : Start -->
+    <?php echo view('components/sidebar/index'); ?>
+    <!-- Sidebar : End -->
+
     <!-- Content Wrapper : Start -->
     <div class="content-wrapper">
       <div class="content">
 
         <div class="row">
-          
+
           <!-- Your Content Here : Start -->
           <?php
-            if ($page) {
-              echo view($page);
-            }
+          if ($page) {
+            echo view($page);
+          }
           ?>
           <!-- Your Content Here : End -->
 

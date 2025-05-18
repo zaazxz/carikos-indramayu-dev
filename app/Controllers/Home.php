@@ -25,6 +25,7 @@ class Home extends BaseController
     {
         $wilayahFilter = $this->request->getGet('wilayah');
         $typeFilter    = $this->request->getGet('type');
+        $priceFilter   = $this->request->getGet('maxprice');
 
         // get setting dan jenis kos seperti biasa
         $data = [
@@ -37,7 +38,7 @@ class Home extends BaseController
         ];
 
         // kalau ada filter, load data sesuai
-        if ($wilayahFilter || $typeFilter) {
+        if ($wilayahFilter || $typeFilter || $priceFilter) {
             $data['kos'] = $this->KosModel->getFilteredData($wilayahFilter, $typeFilter);
         } else {
             $data['kos'] = $this->KosModel->getData();
