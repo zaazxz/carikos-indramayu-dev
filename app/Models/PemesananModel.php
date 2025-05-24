@@ -11,6 +11,7 @@ class PemesananModel extends Model
     protected $allowedFields = [
         'id_user',
         'id_kos',
+        'identity_document',
         'proof_of_payment',
         'status',
         'start_date',

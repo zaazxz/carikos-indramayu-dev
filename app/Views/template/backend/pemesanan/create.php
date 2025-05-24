@@ -229,6 +229,15 @@ $tanggal = Time::now('Asia/Jakarta')->toDateString();
                             </div>
                             <!-- rekening Owner : End -->
 
+                            <!-- Identity Document : Start -->
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Upload Identitas (KTP, SIM, dll)</label>
+                                    <input class="form-control" type="file" name="identity_document">
+                                </div>
+                            </div>
+                            <!-- Identity Document : End -->
+
                             <!-- CTA Button : Start -->
                             <?php if ($kos[0]['available'] > 0 && session()->get('level') == 'Pencari Kos') : ?>
                                 <div class="col-6">

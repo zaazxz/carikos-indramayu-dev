@@ -1,7 +1,9 @@
 <?php
 
-// Catch Route if route only have 1 segment catch point 1, and if more than 1 segment catch point 2
+// Adding Variable
 $uri = service('uri');
+$errors = session()->getFlashdata('errors');
+$success = session()->getFlashdata('success');
 
 ?>
 
@@ -82,6 +84,42 @@ $uri = service('uri');
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
 
+    <?php if (! empty($errors)) : ?>
+      <div class="alert alert-danger alert-dismissible" role="alert" style="position: absolute; top: 20px; right: 20px; z-index: 99999;">
+
+        <!-- Adding Icon X : Start -->
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <!-- Adding Icon X : End -->
+
+        <!-- Adding Icon : Start -->
+        <i class="icon fas fa-exclamation-triangle"></i>
+        <!-- Adding Icon : End -->
+
+        <?php echo $errors ?>
+
+      </div>
+    <?php endif; ?>
+
+    <?php if (! empty($success)) : ?>
+      <div class="alert alert-success alert-dismissible" role="alert" style="position: absolute; top: 20px; right: 20px; z-index: 99999;">
+
+        <!-- Adding Icon X : Start -->
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <!-- Adding Icon X : End -->
+
+        <!-- Adding Icon : Start -->
+        <i class="icon fas fa-check-circle"></i>
+        <!-- Adding Icon : End -->
+
+        <?php echo $success ?>
+
+      </div>
+    <?php endif; ?>
+
     <!-- Navbar : Start -->
     <?php echo view('components/navbar/main'); ?>
     <!-- Navbar : End -->
@@ -142,15 +180,18 @@ $uri = service('uri');
   </div>
   <!-- ./wrapper -->
 
-  <!-- REQUIRED SCRIPTS -->
+  <!-- Catching Error : Start -->
   <script>
-    // Catch Data from redirecting
-    let successMessage = "<?php echo session()->getFlashdata('success'); ?>";
+    window.setTimeout(function() {
 
-    if (successMessage) {
-      alert(successMessage);
-    }
+      // Fade alert without slide
+      $('.alert').fadeTo(500, 0, function() {
+        $(this).remove();
+      })
+
+    }, 3000);
   </script>
+  <!-- Catching Error : End -->
 
 </body>
 

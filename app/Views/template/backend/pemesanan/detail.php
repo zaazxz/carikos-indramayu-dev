@@ -209,7 +209,20 @@ $tanggal = Time::now('Asia/Jakarta')->toDateString();
                             </div>
                             <!-- Tanggal mulai sewa : End -->
 
-                            <!-- Tanggal mulai sewa : Start -->
+                            <!-- Dokumen Pendukung : Start -->
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Dokumen Pendukung</label>
+                                    <?php if ($pemesanan['identity_document'] == null) : ?>
+                                        <input value="Belum ada Dokumen Pendukung" class="form-control" type="text" disabled>
+                                    <?php else : ?>
+                                        <img src="<?php echo base_url('/upload/pemesanan/dokumen/' . $pemesanan['identity_document']) ?>" class="img-fluid" alt="Bukti Pembayaran" style="width: 100%; height: 132px; object-fit: cover">
+                                    <?php endif ?>
+                                </div>
+                            </div>
+                            <!-- Dokumen Pendukung : End -->
+
+                            <!-- Bukti Pembayaran : Start -->
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Bukti Pembayaran</label>
@@ -220,7 +233,7 @@ $tanggal = Time::now('Asia/Jakarta')->toDateString();
                                     <?php endif ?>
                                 </div>
                             </div>
-                            <!-- Tanggal mulai sewa : End -->
+                            <!-- Bukti Pembayaran : End -->
 
                             <!-- CTA Button : Start -->
                             <?php if ($pemesanan['available'] > 0 && session()->get('level') == 'Pemilik Kos' && $pemesanan['status'] == 'Pending') : ?>
@@ -254,7 +267,6 @@ $tanggal = Time::now('Asia/Jakarta')->toDateString();
                 </div>
 
             </form>
-
         </div>
         <!-- Card Body : End -->
 

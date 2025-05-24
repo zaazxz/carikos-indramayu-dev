@@ -1,8 +1,12 @@
 <?php
 
+// Adding Variable
 $uri = service('uri');
+$errors = session()->getFlashdata('errors');
+$success = session()->getFlashdata('success');
 
 ?>
+
 
 <!DOCTYPE html>
 
@@ -37,6 +41,42 @@ $uri = service('uri');
 
 <body class="hold-transition sidebar-collapse layout-top-nav">
   <div class="wrapper">
+
+    <?php if (! empty($errors)) : ?>
+      <div class="alert alert-danger alert-dismissible" role="alert" style="position: absolute; top: 20px; right: 20px; z-index: 99999;">
+
+        <!-- Adding Icon X : Start -->
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <!-- Adding Icon X : End -->
+
+        <!-- Adding Icon : Start -->
+        <i class="icon fas fa-exclamation-triangle"></i>
+        <!-- Adding Icon : End -->
+
+        <?php echo $errors ?>
+
+      </div>
+    <?php endif; ?>
+
+    <?php if (! empty($success)) : ?>
+      <div class="alert alert-success alert-dismissible" role="alert" style="position: absolute; top: 20px; right: 20px; z-index: 99999;">
+
+        <!-- Adding Icon X : Start -->
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <!-- Adding Icon X : End -->
+
+        <!-- Adding Icon : Start -->
+        <i class="icon fas fa-check-circle"></i>
+        <!-- Adding Icon : End -->
+
+        <?php echo $success ?>
+
+      </div>
+    <?php endif; ?>
 
     <!-- Navbar : Start -->
     <?php echo view('components/navbar/index'); ?>
@@ -79,6 +119,19 @@ $uri = service('uri');
   <!-- assets App : Start -->
   <script src="<?php echo base_url('assets') ?>/dist/js/adminlte.min.js"></script>
   <!-- assets App : End -->
+
+  <!-- Catching Error : Start -->
+  <script>
+    window.setTimeout(function() {
+
+      // Fade alert without slide
+      $('.alert').fadeTo(500, 0, function() {
+        $(this).remove();
+      })
+
+    }, 3000);
+  </script>
+  <!-- Catching Error : End -->
 
 </body>
 

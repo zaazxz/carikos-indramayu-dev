@@ -154,18 +154,16 @@ class Auth extends BaseController
                 if ($user['level'] == 'Admin') {
                     return redirect()->to('/dashboard')->with('success', 'Login Berhasil');
                 } elseif ($user['level'] == 'Pencari Kos') {
-                    return redirect()->to('/dashboard/kos')->with('success', 'Login Berhasil');
+                    return redirect()->to('/')->with('success', 'Login Berhasil');
                 } elseif ($user['level'] == 'Pemilik Kos') {
                     return redirect()->to('/dashboard/kos')->with('success', 'Login Berhasil');
                 }
 
             } else {
-                $data['error'] = 'Password / Email Salah';
-                return redirect()->to('/login')->withInput()->with('error', $data['error']);
+                return redirect()->to('/login')->withInput()->with('errors', 'Password / Email Salah');
             }
         } else {
-            $data['error'] = 'Password / Email Salah';
-            return redirect()->to('/login')->withInput()->with('error', $data['error']);
+            return redirect()->to('/login')->withInput()->with('errors', 'Password / Email Salah');
         }
     }
 }

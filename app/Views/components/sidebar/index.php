@@ -27,6 +27,17 @@ $uri = service('uri');
                     </a>
                 </li>
 
+                <?php if (session()->get('level') == 'Pencari Kos') : ?>
+                    <li class="nav-item">
+                        <a href="/dashboard/pemesanan" class="nav-link">
+                            <i class="nav-icon fas fa-calendar-check"></i>
+                            <p>
+                                Pemesanan
+                            </p>
+                        </a>
+                    </li>
+                <?php endif ?>
+
                 <!-- Form : Start -->
                 <?php if ($uri->getSegment(1) != 'pemesanan') : ?>
                     <form action="/" method="get">
@@ -100,11 +111,27 @@ $uri = service('uri');
                             <div class="nav-link">
                                 <div class="input-group input-group-sm">
 
-                                    <!-- Harga Minimum & Harga Maximum : Start -->
-                                    <input type="text" class="form-control rounded" placeholder="Minimum" id="minimumPrice" value="200000" disabled>
-                                    <span>-</span>
-                                    <input type="text" class="form-control rounded" placeholder="Maximum" id="maximumPrice" value="200000" disabled>
-                                    <!-- Harga Minimum & Harga Maximum : End -->
+                                    <div class="row d-flex justify-content-center mb-2">
+
+                                        <!-- Harga Minimum : Start -->
+                                        <div class="col-5">
+                                            <input type="text" class="form-control rounded" placeholder="Minimum" id="minimumPrice" value="200000" disabled>
+                                        </div>
+                                        <!-- Harga Minimum : End -->
+
+                                        <!-- Divider : Start -->
+                                        <div class="col-2 text-center">
+                                            <span>-</span>
+                                        </div>
+                                        <!-- Divider : End -->
+
+                                        <!-- Harga Maximum : Start -->
+                                        <div class="col-5">
+                                            <input type="text" class="form-control rounded" placeholder="Maximum" id="maximumPrice" value="200000" disabled>
+                                        </div>
+                                        <!-- Harga Maximum : End -->
+
+                                    </div>
 
                                     <!-- Slider : Start -->
                                     <div class="slidecontainer">
@@ -133,7 +160,6 @@ $uri = service('uri');
 </aside>
 
 <script>
-
     // Ambil elemen
     const filterWilayah = document.getElementById('filterWilayah');
     const filterType = document.getElementById('filterType');
@@ -181,5 +207,4 @@ $uri = service('uri');
         if (url.endsWith("&")) url = url.slice(0, -1);
         window.location.href = url;
     }
-    
 </script>
