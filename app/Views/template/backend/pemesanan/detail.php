@@ -223,8 +223,6 @@ $tanggal = Time::now('Asia/Jakarta')->toDateString();
                             <!-- Dokumen Pendukung : End -->
 
                             <!-- Bukti Pembayaran : Start -->
-
-                            <!-- Bukti Pembayaran : Start -->
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Bukti Pembayaran</label>
