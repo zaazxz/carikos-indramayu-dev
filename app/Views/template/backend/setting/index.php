@@ -79,11 +79,4 @@
     var layerControl = L.control.layers(baseMaps).addTo(map);
 
     map.addControl(L.control.search());
-
-    // Catch error
-    let successMessage = "<?php echo session()->getFlashdata('success'); ?>";
-
-    if (successMessage) {
-        alert(successMessage);
-    }
 </script>

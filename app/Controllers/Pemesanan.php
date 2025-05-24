@@ -83,7 +83,7 @@ class Pemesanan extends BaseController
         ]));
 
         // Getting file
-        $file = $this->request->getFile('proof_of_payment');
+        $file = $this->request->getFile('identity_document');
 
         // Getting user name from session
         $userName = session()->get('name');
@@ -92,9 +92,6 @@ class Pemesanan extends BaseController
         $nowDate = Time::now('Asia/Jakarta')->format('d-M-Y');
 
         if ($file) {
-
-            // Getting file name
-            $fileName = $file->getName();
 
             // Getting file extension
             $fileExtension = $file->getClientExtension();
@@ -106,13 +103,14 @@ class Pemesanan extends BaseController
             $newFileName = $userName . "_" . $nowDate . '_' . $randomName . '.' . $fileExtension;
 
             // Move file to folder
-            $file->move(ROOTPATH . 'public/upload/pemesanan', $newFileName);
+            $file->move(ROOTPATH . 'public/upload/pemesanan/dokumen', $newFileName);
         }
 
         // Save data to database
         $data = [
             'id_user' => session()->get('id'),
             'id_kos' => $this->request->getPost('id_kost'),
+            'identity_document' => $newFileName,
             'proof_of_payment' => null,
             'status' => 'Pending',
             'start_date' => Time::now('Asia/Jakarta')->format('Y-m-d'),
@@ -200,7 +198,6 @@ class Pemesanan extends BaseController
     // Upload proof of payment
     public function updateProof($id)
     {
-
         // Getting file
         $file = $this->request->getFile('proof_of_payment');
 
@@ -210,7 +207,9 @@ class Pemesanan extends BaseController
         // getting now date
         $nowDate = Time::now('Asia/Jakarta')->format('d-M-Y');
 
-        if ($file) {
+        $newFileName = null;
+
+        if ($file && $file->isValid() && !$file->hasMoved()) {
 
             // Getting file extension
             $fileExtension = $file->getClientExtension();

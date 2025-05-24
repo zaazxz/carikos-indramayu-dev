@@ -25,6 +25,10 @@ class Pemesanan extends Migration
                 'constraint' => 11,
                 'unsigned' => true,
             ],
+            'identity_document' => [
+                'type' => 'TEXT',
+                'null' => true,  
+            ],
             'proof_of_payment' => [
                 'type' => 'TEXT',
                 'null' => true,
