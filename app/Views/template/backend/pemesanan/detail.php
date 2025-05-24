@@ -214,7 +214,7 @@ $tanggal = Time::now('Asia/Jakarta')->toDateString();
                                 <div class="form-group">
                                     <label>Dokumen Pendukung</label>
                                     <?php if ($pemesanan['identity_document'] == null) : ?>
-                                        <input value="Belum ada bukti pembayaran" class="form-control" type="text" disabled>
+                                        <input value="Belum ada Dokumen Pendukung" class="form-control" type="text" disabled>
                                     <?php else : ?>
                                         <img src="<?php echo base_url('/upload/pemesanan/dokumen/' . $pemesanan['identity_document']) ?>" class="img-fluid" alt="Bukti Pembayaran" style="width: 100%; height: 132px; object-fit: cover">
                                     <?php endif ?>
