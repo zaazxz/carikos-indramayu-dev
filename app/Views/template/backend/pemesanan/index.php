@@ -35,7 +35,7 @@
                                             <span class="badge badge-success">Verified</span>
                                         <?php } ?>
                                         <?php if ($value['status'] == "Pending") { ?>
-                                            
+
                                             <?php if ($value['proof_of_payment'] == null) { ?>
                                                 <span class="badge badge-secondary">
                                                     <span class="badge badge-warning badge-pill" data-toggle="tooltip" title="Belum Upload Bukti Pembayaran">
@@ -50,7 +50,7 @@
                                                 <span class="badge badge-secondary">Pending</span>
                                             <?php } ?>
                                             <!-- If Pending && proof_of_payment not null : End -->
-                                            
+
                                         <?php } ?>
                                         <?php if ($value['status'] == "Rejected") { ?>
                                             <span class="badge badge-danger">Rejected</span>
@@ -112,7 +112,7 @@
                                         <?php if ($value['proof_of_payment'] == null && $value['status'] == "Pending") { ?>
 
                                             <!-- Opening Modal : Start -->
-                                            <button class="btn btn-xs btn-warning btn-flat" data-toggle="modal" data-target="#uploadProof<?php echo $value['id'] ?>">
+                                            <button class="btn btn-xs btn-warning btn-flat open-upload-modal" data-toggle="modal" data-id="<?php echo $value['id'] ?>">
                                                 <i class="fas fa-upload"></i>
                                             </button>
                                             <!-- Opening Modal : End -->
@@ -131,50 +131,6 @@
         </div>
     </div>
 </div>
-
-<!-- Modal : Start -->
-<?php foreach ($pemesanan as $key => $value) : ?>
-    <div class="modal fade" id="uploadProof<?php echo $value['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Upload Bukti Pembayaran</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="/dashboard/pemesanan/proof/<?php echo $value['id'] ?>" method="post" enctype="multipart/form-data">
-
-                        <!-- CSRF token : Start -->
-                        <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
-                        <!-- CSRF token : End -->
-
-                        <!-- Check ID : <?php // echo $value['id'] ?> -->
-
-                        <!-- Preview Image : Start -->
-                        <div class="form-group">
-                            <label for="">Preview Bukti Pembayaran</label>
-                            <img class="img-fluid" src="https://placehold.co/150x150?text=User&font=roboto" alt="Bukti Pembayaran" style="width: 100%; height: 132px; object-fit: cover" id="preview_proof_of_payment<?php echo $value['id'] ?>">
-                        </div>
-                        <!-- Preview Image : End -->
-
-                        <!-- File Input : Start -->
-                        <div class="form-group">
-                            <label for="proof_of_payment">Bukti Pembayaran</label>
-                            <input type="file" class="form-control" name="proof_of_payment" id="proof_of_payment<?php echo $value['id'] ?>">
-                        </div>
-                        <!-- File Input : End -->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                </div>
-            </div>
-        </div>
-    </div>
-<?php endforeach; ?>
-<!-- Modal : End -->
 
 <script>
     $(function() {
@@ -207,22 +163,83 @@
 </script>
 <!-- Tooltip : End -->
 
-<!-- Preview Image : Start -->
+<!-- Script Modal : Start -->
 <script>
-    const proof_of_payment = document.getElementById('proof_of_payment<?php echo $value['id'] ?>');
-    const preview_proof_of_payment = document.getElementById('preview_proof_of_payment<?php echo $value['id'] ?>');
+    document.addEventListener('DOMContentLoaded', function() {
+        // Tombol upload bukti klik
+        const buttons = document.querySelectorAll('.open-upload-modal');
 
-    // Preview Image : Start
-    proof_of_payment.addEventListener('change', function() {
-        const file = this.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                preview_proof_of_payment.setAttribute('src', event.target.result);
+        buttons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+                console.log('Upload untuk id:', id);
+
+                // Set form action ke id yang dipilih
+                const form = document.getElementById('uploadProofForm');
+                form.setAttribute('action', '/dashboard/pemesanan/proof/' + id);
+
+                // Reset preview ke default
+                const previewImg = document.getElementById('preview_proof');
+                previewImg.src = 'https://placehold.co/150x150?text=User&font=roboto';
+
+                // Clear file input
+                document.getElementById('proof_of_payment').value = '';
+
+                // Tampilkan modal
+                $('#uploadProofModal').modal('show');
+            });
+        });
+
+        // Preview image dinamis saat file diinput
+        document.getElementById('proof_of_payment').addEventListener('change', function() {
+            const file = this.files[0];
+            const previewImg = document.getElementById('preview_proof');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    previewImg.setAttribute('src', event.target.result);
+                }
+                reader.readAsDataURL(file);
             }
-            reader.readAsDataURL(file);
-        }
+        });
     });
-    // Preview Image : End
 </script>
-<!-- Preview Image : End -->
+<!-- Script Modal : End -->
+
+<!-- Modal Fixed : Start -->
+<div class="modal fade" id="uploadProofModal" tabindex="-1" role="dialog" aria-labelledby="uploadProofLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="uploadProofForm" method="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title">Upload Bukti Pembayaran</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- CSRF token -->
+                    <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
+
+                    <!-- Preview Image -->
+                    <div class="form-group">
+                        <label>Preview Bukti Pembayaran</label>
+                        <img class="img-fluid" src="https://placehold.co/150x150?text=User&font=roboto" alt="Preview" style="width: 100%; height: 132px; object-fit: cover" id="preview_proof">
+                    </div>
+
+                    <!-- File Input -->
+                    <div class="form-group">
+                        <label for="proof_of_payment">Bukti Pembayaran</label>
+                        <input type="file" class="form-control" name="proof_of_payment" id="proof_of_payment">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Modal Fixed : End -->

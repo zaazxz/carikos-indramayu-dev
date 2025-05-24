@@ -68,11 +68,7 @@ class Kos extends BaseController
             'id_jenis' => $this->request->getPost('id_jenis'),
             'price' => $this->request->getPost('price'),
             'available' => $this->request->getPost('available'),
-
-            // Dummy
-            'id_user' => "3",
-
-
+            'id_user' => session()->get('id'),
             'coordinat' => $this->request->getPost('coordinat'),
             'photo' => $name_file,
             'address' => $this->request->getPost('address'),
